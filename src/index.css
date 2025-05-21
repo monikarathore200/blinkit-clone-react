@@ -1,0 +1,63 @@
+@import "tailwindcss";
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 50px;
+  margin-top: 150px;
+  margin-left: 400px;
+  aspect-ratio: 1;
+  display: grid;
+  border-radius: 50%;
+  background:
+    linear-gradient(0deg ,rgb(0 0 0/50%) 30%,#0000 0 70%,rgb(0 0 0/100%) 0) 50%/8% 100%,
+    linear-gradient(90deg,rgb(0 0 0/25%) 30%,#0000 0 70%,rgb(0 0 0/75% ) 0) 50%/100% 8%;
+  background-repeat: no-repeat;
+  animation: l23 1s infinite steps(12);
+}
+.loader::before,
+.loader::after {
+   content: "";
+   grid-area: 1/1;
+   border-radius: 50%;
+   background: inherit;
+   opacity: 0.915;
+   transform: rotate(30deg);
+}
+.loader::after {
+   opacity: 0.83;
+   transform: rotate(60deg);
+}
+@keyframes l23 {
+  100% {transform: rotate(1turn)}
+}
+
+
+
+.slick-arrow {
+    font-size: 0px;
+    height: 50px;
+    width: 50px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, rgba(0, 0, 0, 0.12) 0px 1px 18px 0px;
+    z-index: 2;
+    border: 4px solid transparent;
+}
+.slick-prev:before, .slick-next:before {
+    font-size: 30px !important;
+    line-height: 1;
+    opacity: .75;
+    color: rgb(0, 0, 0) !important;
+    background-color: rgb(255, 255, 255);
+    border-radius: 60% !important;
+}
+.slick-prev{
+    left: -20px;
+    color: transparent !important;
+    background-color: transparent !important;
+}
+.slick-next {
+    color: transparent !important;
+    background-color: transparent !important;
+}
+
+/* ::-webkit-scrollbar{
+    display: none;
+} */
