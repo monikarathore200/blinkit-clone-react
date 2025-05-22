@@ -1,9 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./common/Header";
 import { IoIosTimer } from "react-icons/io";
 import Footer from "./common/Footer";
+import { Link, useParams } from "react-router-dom";
+import axios from "axios";
 
 export default function product() {
+
+
+  let pId = useParams().id 
+
+  let [img,setimg,]=useState([])
+  let [bigimg,setbigimg]=useState()
+
+
+  const[singledata,setsingledata]=useState([])
+    console.log(singledata)
+  
+
+  
+  const singleproduct=()=>{
+    axios.get(`https://dummyjson.com/products/${pId}`)
+    .then((resss)=>{
+      setsingledata(resss.data)
+      setimg(resss.data.images)
+      setbigimg(resss.data.thumbnail)
+    })
+    .catch((err)=>{
+      console.log(err.message)
+    })
+  }
+
+
+  useEffect(()=>{
+    singleproduct()
+  },[])
   return (
     <>
       <Header />
@@ -11,45 +42,23 @@ export default function product() {
         <div className="grid lg:grid-cols-2 justify-evenly ">
           <div className=" lg:overflow-y-scroll lg:h-[700px]">
             <div className="shadow p-[10px] ">
-              <div>
-                <img
-                  src="https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=450/app/assets/products/sliding_images/jpeg/5ee4441d-9109-48fa-9343-f5ce82b905a6.jpg?ts=1706182143"
-                  className="max-w-[500px] w-full mx-auto p-[5px]
-                "
-                  alt=""
-                />
+              <div className="max-w-[500px] w-full mx-auto p-[5px]">
+                <img src={bigimg} alt="" className="w-[100%] h-[100%]" />
               </div>
               <div className=" grid grid-cols-6 justify-center gap-2">
-                <img
-                  src="https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=85,metadata=none,w=120,h=120/app/assets/products/sliding_images/jpeg/5ee4441d-9109-48fa-9343-f5ce82b905a6.jpg?ts=1706182143"
-                  alt=""
-                  className="w-[70px] h-[70px] sm:w-[80px] sm:h-[80px]"
-
-                />
-                <img
-                  src="https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=85,metadata=none,w=120,h=120/app/assets/products/sliding_images/jpeg/f9ffbae1-bb24-4af4-9368-882b7db8bb62.jpg?ts=1706182143"
-                  alt=""
-                  className="w-[70px] h-[70px] sm:w-[80px] sm:h-[80px]"
-
-                />
-                <img
-                  src="https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=85,metadata=none,w=120,h=120/app/assets/products/sliding_images/jpeg/f89ee8fd-269f-4468-9da9-e7d88047593a.jpg"
-                  alt=""
-                  className="w-[70px] h-[70px] sm:w-[80px] sm:h-[80px]"
-
-                />
-                <img
-                  src="https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=85,metadata=none,w=120,h=120/app/assets/products/sliding_images/jpeg/f9e75c62-98d1-4d92-9d1f-3c4cf720e315.jpg"
-                  alt=""
-                 className="w-[70px] h-[70px] sm:w-[80px] sm:h-[80px]"
-
-                />
-                <img
-                  src="https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=85,metadata=none,w=120,h=120/app/assets/products/sliding_images/jpeg/833bfa36-0f7b-4257-82ff-f14573fbf87b.jpg"
-                  alt=""
-                  className="w-[70px] h-[70px] sm:w-[80px] sm:h-[80px]"
-
-                />
+                {
+                  img.length > 0 ?
+                  img.map((v,i)=>{
+                    return(
+                      <div key={i}>
+                        <img src={v} alt="" onClick={()=> setbigimg(v)}/>
+                        </div>
+                    )
+                  })
+                  :
+                  "loading"
+                }
+              
            
               </div>
             </div>
@@ -110,7 +119,7 @@ export default function product() {
           <div className="lg:h-[700px]">
             <div className="mt-[20px] pt-[30px] px-[15px] text-left ">
               <p>
-                Home / Milk /{" "}
+              <Link to={'/'} > Home</Link>  / Milk /{" "}
                 <span className="text-[#6D6D6D]"> Amul Taaza Toned Milk</span>
               </p>
             </div>
