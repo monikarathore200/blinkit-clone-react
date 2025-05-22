@@ -119,13 +119,13 @@ export default function product() {
           <div className="lg:h-[700px]">
             <div className="mt-[20px] pt-[30px] px-[15px] text-left ">
               <p>
-              <Link to={'/'} > Home</Link>  / Milk /{" "}
-                <span className="text-[#6D6D6D]"> Amul Taaza Toned Milk</span>
+              <Link to={'/'} > Home</Link>  / {singledata.category}/
+                <span className="text-[#6D6D6D]">{singledata.title}</span>
               </p>
             </div>
-            <div className="ps-[30px]">
+            <div className="ps-[10px]">
               <h1 className="text-[23px] font-bold  p-[5px]">
-                Amul Taaza Toned Milk
+               {singledata.title}
               </h1>
               <p className=" flex shadow rounded items-center m-[5px_0px] p-[1px] max-w-[65px] text-[13px] ">
                 <IoIosTimer className="mr-[5px]" />
@@ -135,7 +135,7 @@ export default function product() {
             <div className="">
               <p className="ps-[30px] text-[20px] text-[#259036] m-[5px_0px]">
                 
-                View all by Amul 
+               
               </p>
             </div>
             <div className="m-[0px_10px] mx-auto text-[#6D6D6D] max-w-[90%]">
@@ -149,7 +149,7 @@ export default function product() {
             <div className="flex items-center m-[0px_10px] text-[14px] p-[0px_20px]">
               <div className="p-[2px_15px] border rounded-[10px] border-[#259036]  ">
                 <p className="text-center">500 ml</p>
-                <p className="font-semibold">MRP ₹29</p>
+                <p className="font-semibold">MRP ₹{singledata.price}</p>
               </div>
               <div className="border p-[2px_15px] text-center ml-[15px] rounded-[10px]">
                 <p className="">1 ltr </p>
